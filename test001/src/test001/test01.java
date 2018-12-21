@@ -8,7 +8,6 @@ public class test01 {
 	public static void main(String[] args) {
 		test01 conn = new test01();
 		conn.TheSqlConnection();
-		
 	}
 //这里是SqlConnection 类
  
@@ -47,6 +46,15 @@ public class test01 {
 		}
                //数据库打开后就要关闭
 		
+	}
+	public static Connection getconnection() throws SQLException {
+		
+		 
+	    String URL = "jdbc:mysql://localhost:3306/vincenttest?" 
+	    		  + "serverTimezone=UTC&useUnicode=true&characterEncoding=utf-8&useSSL=false";;//数据库连接字符串，这里的deom为数据库名
+	    String NAME="root";//登录名
+	    String PASSWORD="dgy2275517033";//密码
+	    return DriverManager.getConnection(URL, NAME, PASSWORD);
 	}
 }
 
