@@ -1,5 +1,11 @@
 package search2;
-
+/**
+ * 
+ * @author 豆光耀
+ *
+ * @param <Key>
+ * @param <Value>
+ */
 
 public class BST1<Key extends Comparable<Key>,Value> {
 	private Node root;
@@ -68,4 +74,113 @@ public class BST1<Key extends Comparable<Key>,Value> {
 		public void put(Key key, Value val) {
 			root = put(root, key, val);
 		}
+		//二叉查找树中max()、 min()、floor()、ceiling()方法的实现
+		private Node min(Node x) {
+			if(x.left == null) {
+				return x;
+			}
+			return min(x.left);
+		}
+		public Key min() {
+			return min(root).key;
+		}
+		private Node floor(Node x, Key key) {
+			if(x == null) {
+				return null;
+			}
+			int cmp = key.compareTo(x.key);
+			if(cmp == 0) {
+				return x;
+			}
+			if(cmp < 0) {
+				return floor(x.left,key);
+			}
+			Node t = floor(x.right,key);
+			if(t != null) {
+				return t;
+			}else {
+				return x;
+			}
+		}
+		public Key floor(Key key) {
+			Node x = floor(root, key);
+			if(x == null) {
+				return null;
+			}
+			return x.key;
+		}
+		//二叉查找树中select()和rank()方法的实现
+		
+		//返回排名为k的节点
+		private Node select(Node x, int k) {
+			if(x == null) {
+				return null;
+			}
+			int t = size(x.left);
+			if(t > k) {
+				return select(x.left, k);
+			}else if(t < k) {
+				return select(x.right, k-t-1);
+			}else {
+				return x;
+			}
+		}
+		public Key select(int k) {
+			return select(root,k).key;
+		}
+		//返回以x为根节点的子树中小于x.key的键的数量
+		private int rank(Key key, Node x) {
+			if(x == null) {
+				return 0;
+			}
+			int cmp = key.compareTo(x.key);
+			if(cmp < 0) {
+				return rank(key, x.left);
+			}else if(cmp > 0) {
+				return 1 + size(x.left) + rank(key, x.right);
+			}else {
+				return size(x.left);
+			}
+		}
+		
+		
+		//二叉查找树中delete()方法的实现
+		
+		private Node deleteMin(Node x) {
+			if(x.left == null) {
+				return x.right;
+			}
+			x.left = deleteMin(x.left);
+			x.N = size(x.left) + size(x.right) + 1;
+			return x;
+		}
+		public void deleteMin() {
+			root = deleteMin(root);
+		}
+		
+		private Node delete(Node x, Key key) {
+			if(x == null) {
+				return null;
+			}
+			int cmp = key.compareTo(x.key);
+			if(cmp < 0) {
+				x.left = delete(x.left, key);
+			}else if(cmp > 0) {
+				x.right = delete(x.right, key);
+			}else {
+				if(x.right == null) {
+					return x.left;
+				}
+				if(x.left == null) {
+					return x.right;
+				}
+				Node t = x;
+				x = min(t.right);
+				x.right = deleteMin(t.right);
+				x.left = t.left;
+			}
+			x.N = size(x.left) + size(x.right) + 1;
+			return x;
+		}
+		
 }
