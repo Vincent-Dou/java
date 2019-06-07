@@ -51,7 +51,7 @@ import java.util.concurrent.locks.ReentrantLock;
  *  1. 若无特殊的应用场景，推荐使用synchronized，其使用方便（隐式加减锁） 并且由于synchronized时jvm层面的实现，在之后的JDK还有对其优化的空间；
  *  2. 若要使用公平锁， 读写锁， 超时获取锁等特殊场景，才会考虑使用Lock；
  *
- *线程池：（创建线程的方式，推荐使用线程池来创建线程）
+ *线程池：（创建线程的方式，推荐使用线程池来创建线程）(线程池中的线程被包装为Work工作线程，具备可重复执行任务的能力)
  *     1. 降低资源消耗
  *     2. 提高响应速度
  *     3. 提高线程的可管理性
@@ -74,6 +74,44 @@ import java.util.concurrent.locks.ReentrantLock;
  *          1. 核心线程池
  *          2. 最大线程池
  *          3. 阻塞队列
+ *      关闭线程池： shutdown();
+ *      合理配置线程池： 配置核心池以及最大下称吃线程数量
+ *              cpu密集型任务： Ncpu + 1
+ *              IO密集型任务： 2*Ncpu
+ *
+ *
+ *          常见的阻塞队列：
+ *              ArrayBlockingQueue：基于数组的有界阻塞队列：
+ *              LinkedBlockingQueue： 基于链表的无界阻塞队列 内置线程池FixedThreadPool，SingleThreadPool都采用此队列
+ *              SynchronousQueue: 一个不存储元素的无界阻塞队列(一个元素的插入操作必须要等待同时有一个元素的删除操作，否则插入操作就一直阻塞
+ *                                  内置线程池CachedThreadPool就采用此队列
+ *              ProiorityBlockingQueue: 基于优先级的阻塞队列
+ *    JDK内置的四大线程池：
+ *          Exectors : 线程池的工具类
+ *         1. 固定大小线程池(适用于负载较重的服务器(配置较低），来满足资源分配的需求)
+ *                  Exectors.newFixedThreadPool(int nThreads)
+ *         2. 单线程池（只有一个线程）(当多线程场景下 需要让任务串行执行时)
+ *                  Exectors.newSingleThreadExecutor()
+ *         3. 缓存线程池（适用于负载较轻的服务器，或者执行很多短期的异步任务）
+ *                  Exectuors.newCacheThreadPool();
+ *                  当任务提交速度大于线程执行速度，会不断创建新的线程（有可能无线创建线程将内存写满）
+ *                  当任务的执行速度大于任务提交速度， 只会创建若干个有限线程
+ *         4. 定时调度池
+ *                  1. Exectors.newScheduledThreadPool(int nThreads)
+ *                      延迟period
+ *
+ *                  2. 延迟delay个单元后每隔period时间单元就执行一次command任务
+ * FutureTask：可以保证多线程场景下，任务只会被一个线程执行一次，其他线程不在执行此任务
+ *      Future接口中的get方法会阻塞当前线程直到取得callable的返回值
+ *
+ *
+ * 拓展问题：
+ *      jdk1.7 任务分工Fork/Join
+ *      jdk1.8 StampLock
+ *      JUC并发工具
+ *          CountDownLatch 闭锁
+ *          CyclicBarrier 循环栅栏
+ *
  */
 
 class Task implements Runnable{
@@ -99,6 +137,7 @@ public class test0604 {
 //        s = "23";
 //    }
     public static void main(String[] args) {
+        System.out.println(Runtime.getRuntime().availableProcessors());
 //        int[] arr = {0};
 //        String s = "0";
 //        chagne(s);
