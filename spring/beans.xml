@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+<!--  默认构造函数装配bean-->
+<!--<bean id="uuuu" class="dgy.bean.User">-->
+<!--</bean>-->
+
+<!--    工厂装配bean-->
+<!--    <bean id="Factory" class="dgy.bean.UserFactory"></bean>-->
+<!--    <bean id="user" factory-bean="Factory" factory-method="getUser"></bean>-->
+
+<!--    静态方法装配bean-->
+<!--    <bean id="usu" class="dgy.bean.UserFactory" factory-method="getUser"></bean>-->
+
+
+    <!-- 构造方法注入-->
+<!--    <bean id="person" class="dgy.bean.Person">-->
+<!--        <constructor-arg name="name" value="dou"></constructor-arg>-->
+<!--        <constructor-arg index="1" value="20"></constructor-arg>-->
+<!--        <constructor-arg name="birthday" ref="date"></constructor-arg>-->
+<!--    </bean>-->
+<!--    <bean id="date" class="java.util.Date"></bean>-->
+
+<!--  set方法注入  -->
+    <bean id="person" class="dgy.bean.Person">
+        <property name="age" value="51"></property>
+        <property name="name" value="douguang"></property>
+        <property name="birthday" ref="birthday"></property>
+    </bean>
+    <bean id="birthday" class="java.util.Date"></bean>
+
+
+</beans>
