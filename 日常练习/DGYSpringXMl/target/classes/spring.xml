@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd">
+    <bean id="accountservice" class="com.dgy.service.impl.AccountServiceImpl">
+        <property name="accountDao" ref="accountDao"></property>
+    </bean>
+    <bean id="accountDao" class="com.dgy.dao.impl.AccountDaoImpl">
+        <property name="qr" ref="qrrunner"></property>
+    </bean>
+    <bean id="qrrunner" class="org.apache.commons.dbutils.QueryRunner" scope="prototype">
+        <constructor-arg name="ds" ref="dss"></constructor-arg>
+    </bean>
+<!--    <bean id="dss" class="com.mchange.v2.c3p0.ComboPooledDataSource">-->
+<!--        <property name="jdbcUrl" value="jdbc:mysql://localhost:3306/vincenttest?serverTimezone=GMT"></property>-->
+<!--        <property name="user" value="root"></property>-->
+<!--        <property name="password" value="dgy2275517033"></property>-->
+<!--        <property name="driverClass" value="com.mysql.cj.jdbc.Driver"></property>-->
+<!--    </bean>-->
+        <bean id="dss" class="com.alibaba.druid.pool.DruidDataSourceC3P0Adapter">
+        <property name="password" value="dgy2275517033"></property>
+        <property name="jdbcUrl" value="jdbc:mysql://localhost:3306/vincenttest?serverTimezone=GMT"></property>
+        <property name="user" value="root"></property>
+        <property name="driverClass" value="com.mysql.cj.jdbc.Driver"></property>
+    </bean>
+</beans>
