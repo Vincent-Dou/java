@@ -2,10 +2,7 @@ package com.config;
 
 import com.mchange.v2.c3p0.ComboPooledDataSource;
 import org.apache.commons.dbutils.QueryRunner;
-import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.ComponentScan;
-import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.Scope;
+import org.springframework.context.annotation.*;
 
 import javax.sql.DataSource;
 import java.beans.PropertyVetoException;
@@ -17,21 +14,8 @@ import java.beans.PropertyVetoException;
  * Description：
  */
 @ComponentScan(value = "com.dgy")
-@Configuration
+@Import(jdbcPro.class)
+@PropertySource("springAnno.properties")
 public class AnnoConfig {
 
-    @Bean(name = "qr")
-//    @Scope(value = "prototype")
-    public QueryRunner getQr(DataSource ds){
-        return new QueryRunner(ds);
-    }
-    @Bean(name = "ds")
-    public DataSource getDs() throws PropertyVetoException {
-            ComboPooledDataSource ds = new ComboPooledDataSource();
-            ds.setUser("root");
-            ds.setJdbcUrl("jdbc:mysql://localhost:3306/vincenttest?serverTimezone=GMT");
-            ds.setPassword("dgy2275517033");
-            ds.setDriverClass("com.mysql.cj.jdbc.Driver");
-            return ds;
-    }
 }
