@@ -1,0 +1,9 @@
+0:0:0:0:0:0:0:1 - - [09/Jul/2019:14:20:21 +0800] "GET / HTTP/1.1" 200 947 http-bio-8080-exec-2 773
+0:0:0:0:0:0:0:1 - - [09/Jul/2019:14:20:21 +0800] "GET /img/4.jpg HTTP/1.1" 304 - http-bio-8080-exec-3 13
+0:0:0:0:0:0:0:1 - - [09/Jul/2019:14:20:23 +0800] "GET /favicon.ico HTTP/1.1" 404 949 http-bio-8080-exec-4 18
+0:0:0:0:0:0:0:1 - - [09/Jul/2019:14:20:30 +0800] "GET /readerlogin.jsp HTTP/1.1" 200 1530 http-bio-8080-exec-5 105
+0:0:0:0:0:0:0:1 - - [09/Jul/2019:14:20:31 +0800] "GET /readerregister.jsp HTTP/1.1" 200 1433 http-bio-8080-exec-7 167
+0:0:0:0:0:0:0:1 - - [09/Jul/2019:14:20:44 +0800] "GET /reader/register?readername=%E6%A2%81%E6%9C%9D%E4%BC%9F&password=123&readerdept=+ad HTTP/1.1" 200 138 http-bio-8080-exec-8 1013
+0:0:0:0:0:0:0:1 - - [09/Jul/2019:14:20:47 +0800] "GET /readerlogin.jsp HTTP/1.1" 200 1530 http-bio-8080-exec-10 2
+0:0:0:0:0:0:0:1 - - [09/Jul/2019:14:20:54 +0800] "POST /reader/login HTTP/1.1" 200 917 http-bio-8080-exec-2 682
+0:0:0:0:0:0:0:1 - - [09/Jul/2019:14:22:16 +0800] "GET /reader/myBorrow HTTP/1.1" 200 102 http-bio-8080-exec-5 110
