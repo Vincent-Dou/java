@@ -1,0 +1,3 @@
+0:0:0:0:0:0:0:1 - - [14/Jul/2019:00:05:44 +0800] "GET /admin/updateDocBut?docid=3 HTTP/1.1" 500 20966 http-bio-8080-exec-9 69
+0:0:0:0:0:0:0:1 - - [14/Jul/2019:00:05:45 +0800] "GET /admin/login?adminid=123456&password=admin HTTP/1.1" 500 20988 http-bio-8080-exec-2 12
+0:0:0:0:0:0:0:1 - - [14/Jul/2019:00:05:52 +0800] "GET /admin/login?adminid=123456&password=admin HTTP/1.1" 500 20988 http-bio-8080-exec-8 8
